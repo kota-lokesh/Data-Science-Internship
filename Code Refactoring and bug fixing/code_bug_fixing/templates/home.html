@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0b0b0b;
+        }
+        .container {
+            background-color: #fff;
+            justify-content: center;
+        }
+
+        .heading {
+            background-color: #fff;
+            text-align: center;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"] {
+            width: calc(100% - 50px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 2px solid #080808;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .edit-delete-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .delete-btn {
+            padding: 5px 5px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        
+        }
+
+        .delete-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .edit-btn {
+            padding: 5px 5px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .edit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">NOTEPAD</h1>
+    </div>
+    <form action="/" method="post">
+        <input type="text" name="note" placeholder="Enter a note"><br>
+        <button name="add_note">Add Note</button>
+    </form>
+
+    <ul>
+    {% for index in range(notes|length) %}
+        <li>
+            <span>{{ notes[index] }}</span><br>
+            <div class="edit-delete-container"><br>
+                <form action="/edit/{{ index }}" method="get">
+                    <button class="edit-btn" type="submit">Edit</button>
+                    <br>
+                </form>
+                <form action="/delete/{{ index }}" method="post">
+                    <button class="delete-btn" type="submit">Delete</button>
+                    <br>
+                </form>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
